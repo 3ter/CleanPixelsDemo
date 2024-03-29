@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwmsv8quh4tt5"]
 
-[ext_resource type="PackedScene" uid="uid://cxmdrim3mifht" path="res://basic_level.tscn" id="1_8xxjs"]
 [ext_resource type="Shader" path="res://adjustable_interpolation.gdshader" id="1_b0vk1"]
 [ext_resource type="Script" path="res://main_scene.gd" id="2_lh3vb"]
+[ext_resource type="PackedScene" uid="uid://dpi5k2jubdvxh" path="res://ui/menu.tscn" id="4_uc2qb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r781e"]
 shader = ExtResource("1_b0vk1")
@@ -36,4 +36,6 @@ audio_listener_enable_2d = true
 size = Vector2i(416, 240)
 render_target_update_mode = 4
 
-[node name="BasicLevel" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_8xxjs")]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Menu" parent="UI" instance=ExtResource("4_uc2qb")]

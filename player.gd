@@ -10,12 +10,12 @@ extends CharacterBody2D
 
 const SPEED := 110.0
 const JUMP_VELOCITY := -300.0
-const COYOTE_TIME := 5.0 / 60.0 # 5 frames 
+const COYOTE_TIME := 5.0 / 60.0  # 5 frames
 
 signal moved(pos: Vector2)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var air_time := 0.0
 
@@ -26,7 +26,7 @@ func _physics_process(delta):
 		air_time += delta
 	else:
 		air_time = 0.0
-	
+
 	if air_time > COYOTE_TIME:
 		velocity.y += gravity * delta
 
@@ -40,10 +40,10 @@ func _physics_process(delta):
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = move_toward(velocity.x, SPEED * direction, SPEED * 0.125)
-		$AnimatedSprite2D.flip_h = bool(direction - 1.0) # Left = -2.0 (true)  /  Right = 0.0 (false)
+		$AnimatedSprite2D.flip_h = bool(direction - 1.0)  # Left = -2.0 (true)  /  Right = 0.0 (false)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.25)
-	
+
 	# Animations
 	if air_time > COYOTE_TIME:
 		$AnimatedSprite2D.play("air")
@@ -51,7 +51,7 @@ func _physics_process(delta):
 		$AnimatedSprite2D.play("run")
 	else:
 		$AnimatedSprite2D.play("default")
-	
+
 	# Redirecting the move_and_slide() call to a new function, so we can emit the "moved" signal.
 	# Doing this in another function may not be necessary for a super simple character controller like this one.
 	# However, with more complex character controllers, and especially ones that utilize state machines,
